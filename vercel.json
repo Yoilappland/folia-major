@@ -1,5 +1,5 @@
 {
-  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- . ':(exclude)docs/CODEMAP.md'",
+  "ignoreCommand": "BASE=\"${VERCEL_GIT_PREVIOUS_SHA:-HEAD^}\"; if ! git cat-file -e \"${BASE}^{commit}\" 2>/dev/null; then exit 1; fi; git diff --quiet \"${BASE}\" HEAD -- . ':(exclude)docs/CODEMAP.md'",
   "rewrites": [
     { "source": "/api/qq/:path*", "destination": "/api/qq?path=/:path*" }
   ]
